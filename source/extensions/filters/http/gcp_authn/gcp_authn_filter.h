@@ -45,8 +45,8 @@ public:
   enum class State { NotStarted, Calling, Complete };
 
   GcpAuthnFilter(FilterConfigSharedPtr filter_config,
-                 Server::Configuration::FactoryContext& context, const std::string& stats_prefix,
-                 TokenCacheImpl<JwtToken>* token_cache)
+                 Server::Configuration::ServerFactoryContext& context,
+                 const std::string& stats_prefix, TokenCacheImpl<JwtToken>* token_cache)
       : filter_config_(std::move(filter_config)), context_(context),
         client_(std::make_unique<GcpAuthnClient>(*filter_config_, context_)),
         stats_(generateStats(stats_prefix, context_.scope())), jwt_token_cache_(token_cache) {}
@@ -68,7 +68,7 @@ private:
   }
 
   FilterConfigSharedPtr filter_config_;
-  Server::Configuration::FactoryContext& context_;
+  Server::Configuration::ServerFactoryContext& context_;
   std::unique_ptr<GcpAuthnClient> client_;
   Http::StreamDecoderFilterCallbacks* decoder_callbacks_{};
   // The pointer to request headers for header manipulation later.

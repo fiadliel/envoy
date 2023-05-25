@@ -15,6 +15,8 @@ behavior_changes:
     When ``append_x_forwarded_host`` is enabled for a given route action it is now only appended iff it is different from the last
     value in the list. This resolves issues where a retry caused the same value to be appended multiple times. This
     behavioral change can be temporarily reverted by setting runtime guard ``envoy_reloadable_features_append_xfh_idempotent`` to false.
+  change: |
+    Made the :ref:`gcp_authn <envoy_v3_api_msg_extensions.filters.http.gcp_authn.v3.GcpAuthnFilterConfig>` work as an upstream filter.
 
 minor_behavior_changes:
 # *Changes that may cause incompatibilities for some users, but should not for most*
